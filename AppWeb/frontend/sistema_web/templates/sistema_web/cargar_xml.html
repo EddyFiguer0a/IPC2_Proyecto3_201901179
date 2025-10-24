@@ -1,0 +1,73 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Cargar XML{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i></i> Cargar Archivos XML</h2>
+        <p class="text-muted">Carga archivos XML de configuración o consumos al sistema</p>
+        <hr>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-gear"></i> Cargar Configuración</h5>
+            </div>
+            <div class="card-body">
+                <p>Archivo XML con recursos, categorías, clientes e instancias.</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="configuracion">
+                    
+                    <div class="mb-3">
+                        <label for="archivo_config" class="form-label">Seleccionar archivo XML:</label>
+                        <input type="file" class="form-control" id="archivo_config" name="archivo" accept=".xml" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="bi bi-upload"></i> Cargar Configuración
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"><i class="bi bi-clock-history"></i> Cargar Consumos</h5>
+            </div>
+            <div class="card-body">
+                <p>Archivo XML con los consumos de recursos de las instancias.</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="consumo">
+                    
+                    <div class="mb-3">
+                        <label for="archivo_consumo" class="form-label">Seleccionar archivo XML:</label>
+                        <input type="file" class="form-control" id="archivo_consumo" name="archivo" accept=".xml" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-upload"></i> Cargar Consumos
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="alert alert-warning">
+            <h6><i class="bi bi-exclamation-triangle"></i> Formato de los archivos XML</h6>
+            <p class="mb-0"><strong>Configuración:</strong> Debe contener las etiquetas &lt;recursos&gt;, &lt;categorias&gt;, &lt;clientes&gt;, &lt;instancias&gt;</p>
+            <p class="mb-0"><strong>Consumos:</strong> Debe contener la etiqueta &lt;consumos&gt; con múltiples &lt;consumo&gt;</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

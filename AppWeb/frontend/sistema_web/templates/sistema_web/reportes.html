@@ -1,0 +1,92 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Reportes PDF{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i></i> Generar Reportes PDF</h2>
+        <p class="text-muted">Crea reportes detallados en formato PDF</p>
+        <hr>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"> Detalle de Factura</h5>
+            </div>
+            <div class="card-body">
+                <p>Genera un PDF con el desglose completo de una factura específica.</p>
+                
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo_reporte" value="factura">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">ID de Factura:</label>
+                        <input type="text" class="form-control" name="id_factura" placeholder="ID de la factura" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-danger w-100">
+                        <i class="bi bi-download"></i> Generar PDF de Factura
+                    </button>
+                </form>
+                
+                <hr>
+                
+                <h6>El reporte incluirá:</h6>
+                <ul class="small">
+                    <li>Información del cliente (NIT, nombre, dirección)</li>
+                    <li>Desglose por instancia</li>
+                    <li>Desglose por recurso consumido</li>
+                    <li>Tiempo de uso y costos</li>
+                    <li>Monto total de la factura</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-6">
+        <div class="card shadow h-100">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0"> Análisis de Ventas</h5>
+            </div>
+            <div class="card-body">
+                <p>Genera un PDF con análisis de ingresos por categorías y recursos.</p>
+                
+                <form method="post" action="#">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo_reporte" value="ventas">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Inicio:</label>
+                        <input type="text" class="form-control" name="fecha_inicio" placeholder="dd/mm/yyyy" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Fin:</label>
+                        <input type="text" class="form-control" name="fecha_fin" placeholder="dd/mm/yyyy" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-success w-100">
+                        <i class="bi bi-download"></i> Generar Reporte de Ventas
+                    </button>
+                </form>
+                
+                <hr>
+                
+                <h6>El reporte incluirá:</h6>
+                <ul class="small">
+                    <li>Categorías que más ingresos generaron</li>
+                    <li>Recursos más consumidos</li>
+                    <li>Gráficos de análisis</li>
+                    <li>Totales y estadísticas</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

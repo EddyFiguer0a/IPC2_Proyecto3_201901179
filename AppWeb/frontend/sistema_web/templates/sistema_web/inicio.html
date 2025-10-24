@@ -1,0 +1,112 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Inicio - Sistema de Facturación{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12 text-center mb-5">
+        <h1 class="display-4"><i></i> Sistema de Facturación en la Nube</h1>
+    </div>
+</div>
+
+<div class="row g-4">
+    <!-- Cargar XML -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-file-earmark-arrow-up text-primary" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Cargar XML</h5>
+                <p class="card-text">Carga archivos XML de configuración o consumos masivamente.</p>
+                <a href="{% url 'sistema_web:cargar_xml' %}" class="btn btn-primary">
+                    <i class="bi bi-upload"></i> Ir a Cargar
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ver Datos -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-table text-info" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Ver Datos</h5>
+                <p class="card-text">Consulta recursos, categorías, clientes, instancias y más.</p>
+                <a href="{% url 'sistema_web:ver_datos' %}" class="btn btn-info text-white">
+                    <i class="bi bi-eye"></i> Ver Datos
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Crear Datos -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-plus-circle text-success" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Crear Datos</h5>
+                <p class="card-text">Crea nuevos recursos, clientes o instancias manualmente.</p>
+                <a href="{% url 'sistema_web:crear_datos' %}" class="btn btn-success">
+                    <i class="bi bi-plus"></i> Crear
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mt-2">
+    <!-- Generar Facturas -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-receipt text-warning" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Generar Facturas</h5>
+                <p class="card-text">Genera facturas por cliente según el periodo especificado.</p>
+                <a href="{% url 'sistema_web:generar_facturas' %}" class="btn btn-warning">
+                    <i class="bi bi-calculator"></i> Generar
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Ver Facturas -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-file-text text-secondary" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Ver Facturas</h5>
+                <p class="card-text">Consulta todas las facturas generadas en el sistema.</p>
+                <a href="{% url 'sistema_web:ver_facturas' %}" class="btn btn-secondary">
+                    <i class="bi bi-list"></i> Ver Facturas
+                </a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Reportes -->
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="mb-3">
+                    <i class="bi bi-file-pdf text-danger" style="font-size: 3rem;"></i>
+                </div>
+                <h5 class="card-title">Reportes PDF</h5>
+                <p class="card-text">Genera reportes PDF de facturas y análisis de ventas.</p>
+                <a href="{% url 'sistema_web:reportes' %}" class="btn btn-danger">
+                    <i class="bi bi-file-earmark-pdf"></i> Reportes
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

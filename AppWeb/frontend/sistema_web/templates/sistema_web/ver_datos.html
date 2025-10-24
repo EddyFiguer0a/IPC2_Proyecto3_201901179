@@ -1,0 +1,66 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Ver Datos{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2>Ver Datos del Sistema</h2>
+        <p class="text-muted">Consulta la información almacenada en el sistema</p>
+        <hr>
+    </div>
+</div>
+
+<!-- Botones para seleccionar tipo de datos -->
+<div class="row mb-4">
+    <div class="col-md-12">
+        <div class="btn-group" role="group">
+            {% for tipo_dato in tipos_disponibles %}
+            <a href="?tipo={{ tipo_dato }}" class="btn btn-{% if tipo == tipo_dato %}primary{% else %}outline-primary{% endif %}">
+                {{ tipo_dato|title }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Tabla de datos -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">{{ tipo|title }}</h5>
+            </div>
+            <div class="card-body">
+                {% if datos %}
+                <div class="table-responsive">
+                    <table class="table table-striped table-hover">
+                        <thead class="table-dark">
+                            <tr>
+                                {% for key in datos.0.keys %}
+                                <th>{{ key|title }}</th>
+                                {% endfor %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in datos %}
+                            <tr>
+                                {% for value in item.values %}
+                                <td>{{ value }}</td>
+                                {% endfor %}
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <p class="text-muted mt-2">Total de registros: <strong>{{ datos|length }}</strong></p>
+                {% else %}
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle"></i> No hay datos de tipo "{{ tipo }}" en el sistema.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

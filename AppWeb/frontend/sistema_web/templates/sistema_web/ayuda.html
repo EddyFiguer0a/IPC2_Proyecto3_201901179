@@ -1,0 +1,150 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Ayuda{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i class="bi bi-question-circle"></i> Ayuda y Documentación</h2>
+        <hr>
+    </div>
+</div>
+
+<!-- Información del Estudiante -->
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card shadow mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0"><i class="bi bi-person"></i> Información del Proyecto</h5>
+            </div>
+            <div class="card-body">
+                <table class="table table-borderless">
+                    <tr>
+                        <th width="200">Estudiante:</th>
+                        <td>Eddy Alvarado</td>
+                    </tr>
+                    <tr>
+                        <th>Carné:</th>
+                        <td>201901179</td>
+                    </tr>
+                    <tr>
+                        <th>Curso:</th>
+                        <td>Introducción a la Programación y Computación 2</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Manual de Usuario -->
+<div class="row">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0"><i class="bi bi-book"></i> Manual de Usuario</h5>
+            </div>
+            <div class="card-body">
+                <h5>1. Cargar Configuración</h5>
+                <p>Para iniciar, debes cargar un archivo XML con la configuración del sistema que incluya recursos, categorías, clientes e instancias.</p>
+                <ol>
+                    <li>Ve a la sección "Cargar XML"</li>
+                    <li>Selecciona el archivo de configuración</li>
+                    <li>Haz clic en "Cargar Configuración"</li>
+                </ol>
+                
+                <hr>
+                
+                <h5>2. Cargar Consumos</h5>
+                <p>Una vez cargada la configuración, puedes registrar los consumos de recursos de cada instancia.</p>
+                <ol>
+                    <li>Ve a la sección "Cargar XML"</li>
+                    <li>Selecciona el archivo de consumos</li>
+                    <li>Haz clic en "Cargar Consumos"</li>
+                </ol>
+                
+                <hr>
+                
+                <h5>3. Generar Facturas</h5>
+                <p>El sistema generará automáticamente facturas por cada cliente según los consumos registrados.</p>
+                <ol>
+                    <li>Ve a la sección "Generar Facturas"</li>
+                    <li>Ingresa el periodo (fecha inicio y fecha fin)</li>
+                    <li>Haz clic en "Generar Facturas"</li>
+                    <li>El sistema calculará los costos y creará las facturas</li>
+                </ol>
+                
+                <hr>
+                
+                <h5>4. Ver Datos</h5>
+                <p>Puedes consultar toda la información del sistema en cualquier momento.</p>
+                <ul>
+                    <li>Recursos disponibles</li>
+                    <li>Categorías registradas</li>
+                    <li>Clientes activos</li>
+                    <li>Instancias creadas</li>
+                    <li>Consumos registrados</li>
+                    <li>Facturas generadas</li>
+                </ul>
+                
+                <hr>
+                
+                <h5>5. Generar Reportes PDF</h5>
+                <p>Crea reportes profesionales en formato PDF.</p>
+                <ul>
+                    <li><strong>Detalle de Factura:</strong> Genera un PDF con el desglose completo de una factura</li>
+                    <li><strong>Análisis de Ventas:</strong> Genera un reporte con las categorías y recursos que más ingresos generan</li>
+                </ul>
+                
+                <hr>
+                
+                <h5>6. Reiniciar Sistema</h5>
+                <p>Si deseas eliminar todos los datos y comenzar desde cero, usa la opción "Reiniciar Sistema" en el menú superior.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row mt-4">
+    <div class="col-md-12">
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white">
+                <h5 class="mb-0"><i class="bi bi-code-slash"></i> Documentación Técnica</h5>
+            </div>
+            <div class="card-body">
+                <h5>Arquitectura del Sistema</h5>
+                <p>El sistema está dividido en dos componentes principales:</p>
+                
+                <h6>Backend (Flask)</h6>
+                <ul>
+                    <li>API REST para procesar solicitudes</li>
+                    <li>Almacenamiento de datos en archivos XML</li>
+                    <li>Validación con expresiones regulares</li>
+                    <li>Programación Orientada a Objetos (POO)</li>
+                </ul>
+                
+                <h6>Frontend (Django)</h6>
+                <ul>
+                    <li>Interfaz web para el usuario</li>
+                    <li>Comunicación con la API mediante HTTP</li>
+                    <li>Generación de reportes PDF</li>
+                    <li>Validación de formularios</li>
+                </ul>
+                
+                <hr>
+                
+                <h5>Tecnologías Utilizadas</h5>
+                <ul>
+                    <li><strong>Python 3.x:</strong> Lenguaje de programación</li>
+                    <li><strong>Flask:</strong> Framework para el backend</li>
+                    <li><strong>Django:</strong> Framework para el frontend</li>
+                    <li><strong>Bootstrap 5:</strong> Framework CSS</li>
+                    <li><strong>xmltodict:</strong> Procesamiento de XML</li>
+                    <li><strong>ReportLab:</strong> Generación de PDF</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

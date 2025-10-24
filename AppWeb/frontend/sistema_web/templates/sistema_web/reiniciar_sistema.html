@@ -1,0 +1,54 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Reiniciar Sistema{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i></i> Reiniciar Sistema</h2>
+        <p class="text-muted">Elimina todos los datos del sistema</p>
+        <hr>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="col-md-8 offset-md-2">
+        <div class="card shadow border-danger">
+            <div class="card-header bg-danger text-white">
+                <h5 class="mb-0"><i class="bi bi-exclamation-triangle"></i> ¡Advertencia!</h5>
+            </div>
+            <div class="card-body">
+                <div class="alert alert-danger">
+                    <h5>Esta acción eliminará permanentemente:</h5>
+                    <ul>
+                        <li>Todos los recursos</li>
+                        <li>Todas las categorías</li>
+                        <li>Todos los clientes</li>
+                        <li>Todas las instancias</li>
+                        <li>Todos los consumos registrados</li>
+                        <li>Todas las facturas generadas</li>
+                    </ul>
+                    <p class="mb-0"><strong>Esta operación no se puede deshacer.</strong></p>
+                </div>
+                
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="mb-3">
+                        <p>¿Estás seguro de que deseas reiniciar el sistema?</p>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-danger btn-lg">
+                            <i class="bi bi-trash"></i> Sí, Reiniciar Sistema
+                        </button>
+                        <a href="{% url 'sistema_web:inicio' %}" class="btn btn-secondary btn-lg">
+                            <i class="bi bi-x-circle"></i> Cancelar
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

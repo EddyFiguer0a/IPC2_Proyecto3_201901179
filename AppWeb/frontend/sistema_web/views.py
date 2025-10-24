@@ -3,6 +3,9 @@ import xmltodict
 from django.shortcuts import render, redirect
 from django.contrib import messages
 
+from django.http import HttpResponse
+from .generador_pdf import GeneradorPDF
+
 API_URL = "http://127.0.0.1:5000"
 
 
@@ -208,3 +211,79 @@ def reiniciar_sistema(request):
         return redirect('sistema_web:inicio')
     
     return render(request, 'sistema_web/reiniciar_sistema.html')
+
+def reportes(request):
+    """Página para generar reportes PDF"""
+    if request.method == "POST":
+        tipo_reporte = request.POST.get('tipo_reporte')
+        
+        if tipo_reporte == 'factura':
+            # Generar PDF de factura específica
+            id_factura = request.POST.get('id_factura')
+            
+            # Consultar la factura desde la API
+            respuesta = requests.get(f"{API_URL}/consultarDatos", params={'tipo': 'facturas'})
+            
+            if respuesta.status_code == 200:
+                resultado = xmltodict.parse(respuesta.content)
+                facturas = resultado.get('respuesta', {}).get('facturas', {}).get('factura', [])
+                
+                if not isinstance(facturas, list):
+                    facturas = [facturas] if facturas else []
+                
+                # Buscar la factura específica
+                factura = None
+                for f in facturas:
+                    if str(f.get('id')) == str(id_factura):
+                        factura = f
+                        break
+                
+                if factura:
+                    # Generar PDF
+                    generador = GeneradorPDF()
+                    pdf_buffer = generador.generar_factura_pdf(factura)
+                    
+                    # Retornar PDF como descarga
+                    response = HttpResponse(pdf_buffer.getvalue(), content_type='application/pdf')
+                    response['Content-Disposition'] = f'attachment; filename="factura_{id_factura}.pdf"'
+                    return response
+                else:
+                    messages.error(request, "Factura no encontrada")
+            else:
+                messages.error(request, "Error al consultar facturas")
+        
+        elif tipo_reporte == 'ventas':
+            # Generar reporte de análisis de ventas
+            fecha_inicio = request.POST.get('fecha_inicio')
+            fecha_fin = request.POST.get('fecha_fin')
+            
+            # Construir datos para el reporte de ventas
+            datos_ventas = {
+                'periodo': {
+                    'fecha_inicio': fecha_inicio,
+                    'fecha_fin': fecha_fin
+                },
+                'resumen': {
+                    'total_facturas': '5',
+                    'ingresos_totales': '1500.00'
+                },
+                'top_recursos': [
+                    {'nombre': 'CPU', 'abreviatura': 'CPU', 'total_tiempo': '100', 'ingresos': '500.00'},
+                    {'nombre': 'RAM', 'abreviatura': 'RAM', 'total_tiempo': '200', 'ingresos': '800.00'},
+                ],
+                'top_categorias': [
+                    {'nombre': 'Servidor Web', 'total_instancias': '3', 'ingresos': '900.00'},
+                    {'nombre': 'Base de Datos', 'total_instancias': '2', 'ingresos': '600.00'},
+                ]
+            }
+            
+            # Generar PDF
+            generador = GeneradorPDF()
+            pdf_buffer = generador.generar_reporte_ventas_pdf(datos_ventas)
+            
+            # Retornar PDF como descarga
+            response = HttpResponse(pdf_buffer.getvalue(), content_type='application/pdf')
+            response['Content-Disposition'] = f'attachment; filename="reporte_ventas_{fecha_inicio}_{fecha_fin}.pdf"'
+            return response
+    
+    return render(request, 'sistema_web/reportes.html')

@@ -1,0 +1,213 @@
+{% extends 'sistema_web/base.html' %}
+
+{% block titulo %}Crear Datos{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-md-12">
+        <h2><i></i> Crear Datos Manualmente</h2>
+        <p class="text-muted">Ingresa nuevos recursos, categorías, clientes o instancias</p>
+        <hr>
+    </div>
+</div>
+
+<!-- Tabs para seleccionar tipo de dato -->
+<ul class="nav nav-tabs" id="tipoTab" role="tablist">
+    <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="recurso-tab" data-bs-toggle="tab" data-bs-target="#recurso" type="button">
+            Recurso
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="categoria-tab" data-bs-toggle="tab" data-bs-target="#categoria" type="button">
+            Categoría
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="cliente-tab" data-bs-toggle="tab" data-bs-target="#cliente" type="button">
+            Cliente
+        </button>
+    </li>
+    <li class="nav-item" role="presentation">
+        <button class="nav-link" id="instancia-tab" data-bs-toggle="tab" data-bs-target="#instancia" type="button">
+            Instancia
+        </button>
+    </li>
+</ul>
+
+<div class="tab-content mt-4" id="tipoTabContent">
+    <!-- Formulario: Recurso -->
+    <div class="tab-pane fade show active" id="recurso" role="tabpanel">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Crear Nuevo Recurso</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="recurso">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">ID:</label>
+                            <input type="text" class="form-control" name="id" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Nombre:</label>
+                            <input type="text" class="form-control" name="nombre" required>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Abreviatura:</label>
+                            <input type="text" class="form-control" name="abreviatura" required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Métrica:</label>
+                            <input type="text" class="form-control" name="metrica" placeholder="GHz, GB, etc." required>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label class="form-label">Precio por Hora:</label>
+                            <input type="number" step="0.01" class="form-control" name="precio_hora" required>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Crear Recurso
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulario: Categoría -->
+    <div class="tab-pane fade" id="categoria" role="tabpanel">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Crear Nueva Categoría</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="categoria">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">ID:</label>
+                        <input type="text" class="form-control" name="id" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Descripción:</label>
+                        <textarea class="form-control" name="descripcion" rows="3" required></textarea>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Carga de Trabajo:</label>
+                        <input type="number" step="0.01" class="form-control" name="carga_trabajo" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Crear Categoría
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulario: Cliente -->
+    <div class="tab-pane fade" id="cliente" role="tabpanel">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Crear Nuevo Cliente</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="cliente">
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">ID:</label>
+                            <input type="text" class="form-control" name="id" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">NIT:</label>
+                            <input type="text" class="form-control" name="nit" placeholder="110339001-K" required>
+                            <small class="text-muted">Formato: XXXXXXXX-X</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Dirección:</label>
+                        <input type="text" class="form-control" name="direccion" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Correo (opcional):</label>
+                            <input type="email" class="form-control" name="correo">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Teléfono (opcional):</label>
+                            <input type="tel" class="form-control" name="telefono">
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Crear Cliente
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formulario: Instancia -->
+    <div class="tab-pane fade" id="instancia" role="tabpanel">
+        <div class="card shadow">
+            <div class="card-body">
+                <h5>Crear Nueva Instancia</h5>
+                <form method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="tipo" value="instancia">
+                    
+                    <div class="mb-3">
+                        <label class="form-label">ID:</label>
+                        <input type="text" class="form-control" name="id" required>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">ID Cliente:</label>
+                            <input type="text" class="form-control" name="id_cliente" required>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">ID Configuración:</label>
+                            <input type="text" class="form-control" name="id_configuracion" required>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" name="nombre" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Fecha de Inicio:</label>
+                        <input type="text" class="form-control" name="fecha_inicio" placeholder="dd/mm/yyyy" required>
+                        <small class="text-muted">Formato: dd/mm/yyyy</small>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save"></i> Crear Instancia
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
